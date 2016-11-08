@@ -1,5 +1,5 @@
-import weather
-import wind
+from src.weather import weather, wind
+
 
 def test_time_from_epoch():
     time_epoch = 1462644000

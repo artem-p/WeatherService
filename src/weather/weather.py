@@ -1,7 +1,10 @@
 # coding: utf-8
-import requests
 import datetime
-import wind
+
+import requests
+
+from src.weather import wind
+
 
 class CurrentWeather:
   def __init__(self, current_weather_json):
@@ -43,6 +46,7 @@ class CurrentWeather:
 
 
 def get_current_weather():
+  # todo api key get_secret
   query = 'http://api.wunderground.com/api/67baf1d645fb0443/conditions/lang:RU/q/Russia/St_Petersburg.json'
   # todo если сервер не отвечает
   current_weather_response = requests.get(query)

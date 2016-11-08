@@ -1,5 +1,4 @@
-import forecast
-
+from src.weather import forecast
 
 
 def test_forecast_to_text():
