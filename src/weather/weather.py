@@ -47,12 +47,10 @@ class CurrentWeather:
 
 
 def get_current_weather():
-    # todo api key get_secret
     api_key = secrests.get("WUNDERGROUND_API_KEY")
-    query = "http://api.wunderground.com/api/%s/lang:RU/q/Russia/St_Petersburg.json" % api_key
+    query = "http://api.wunderground.com/api/%s/conditions/lang:RU/q/Russia/St_Petersburg.json" % api_key
     # todo если сервер не отвечает
     current_weather_response = requests.get(query)
-    current_weather_response.json()['current_observation']
 
     current_weather = CurrentWeather(current_weather_response.json())
     return current_weather.to_text()
