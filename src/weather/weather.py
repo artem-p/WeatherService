@@ -2,66 +2,66 @@
 import datetime
 
 import requests
-
+import src.secrets as secrests
 from src.weather import wind
 
 
+
 class CurrentWeather:
-  def __init__(self, current_weather_json):
-    self.json_weather = current_weather_json
+    def __init__(self, current_weather_json):
+        self.json_weather = current_weather_json
 
-  def parse(self):
-    # parse response result
-    self.city = None
-    self.time = None
-    self.conditions = None
-    self.temp = None
-    self.feelslike = None
-    self.wind_dir = None
-    self.wind_kph = None
+    def parse(self):
+        # parse response result
+        self.city = None
+        self.time = None
+        self.conditions = None
+        self.temp = None
+        self.feelslike = None
+        self.wind_dir = None
+        self.wind_kph = None
 
-    if self.json_weather:
-      current_observation = self.json_weather['current_observation']
-      self.city = current_observation['display_location']['city']
-      timestamp = int(current_observation['observation_epoch'])
-      self.time = time_str_from_epoch(timestamp)
-      self.conditions = current_observation['weather']
-      self.temp = current_observation['temp_c']
-      self.feelslike = int(current_observation['feelslike_c'])
-      self.wind_dir = current_observation['wind_degrees']
-      self.wind_kph = current_observation['wind_kph']
+        if self.json_weather:
+            current_observation = self.json_weather['current_observation']
+            self.city = current_observation['display_location']['city']
+            timestamp = int(current_observation['observation_epoch'])
+            self.time = time_str_from_epoch(timestamp)
+            self.conditions = current_observation['weather']
+            self.temp = current_observation['temp_c']
+            self.feelslike = int(current_observation['feelslike_c'])
+            self.wind_dir = current_observation['wind_degrees']
+            self.wind_kph = current_observation['wind_kph']
 
-  def to_text(self):
-    # Преобразуем в текст для вывода
-    self.parse()
-    self.wind = wind.Wind(self.wind_kph, self.wind_dir)
-    textPart = """%s
+    def to_text(self):
+        # Преобразуем в текст для вывода
+        self.parse()
+        self.wind = wind.Wind(self.wind_kph, self.wind_dir)
+        textPart = """%s
 %s
 %s
 Температура: %d °C
 Ощущается как: %d °C
-Ветер: """ %(self.city, self.time, self.conditions, self.temp, self.feelslike)
-    text = textPart + self.wind.to_text()
-    return text
+Ветер: """ % (self.city, self.time, self.conditions, self.temp, self.feelslike)
+        text = textPart + self.wind.to_text()
+        return text
 
 
 def get_current_weather():
-  # todo api key get_secret
-  query = 'http://api.wunderground.com/api/67baf1d645fb0443/conditions/lang:RU/q/Russia/St_Petersburg.json'
-  # todo если сервер не отвечает
-  current_weather_response = requests.get(query)
-  current_weather_response.json()['current_observation']
+    # todo api key get_secret
+    api_key = secrests.get("WUNDERGROUND_API_KEY")
+    query = "http://api.wunderground.com/api/%s/lang:RU/q/Russia/St_Petersburg.json" % api_key
+    # todo если сервер не отвечает
+    current_weather_response = requests.get(query)
+    current_weather_response.json()['current_observation']
 
-  current_weather = CurrentWeather(current_weather_response.json())
-  return current_weather.to_text()
+    current_weather = CurrentWeather(current_weather_response.json())
+    return current_weather.to_text()
+
 
 def time_str_from_epoch(time_epoch):
     time_from_epoch = datetime.datetime.fromtimestamp(time_epoch)
     return time_from_epoch.strftime("%d.%m.%Y %H:%M")
 
-
-if __name__ == "__main__":
-  print(get_current_weather())
 
 # Сделать из метки нормальное время с юнит-тестом
 # "observation_epoch":"1462644000",
