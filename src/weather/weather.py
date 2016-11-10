@@ -48,12 +48,18 @@ class CurrentWeather:
 
 def get_current_weather():
     api_key = secrests.get("WUNDERGROUND_API_KEY")
-    query = "http://api.wunderground.com/api/%s/conditions/lang:RU/q/Russia/St_Petersburg.json" % api_key
-    # todo если сервер не отвечает
+    query = "http://api.wunderground.com/api/%s/condfitions/lang:RU/q/Russia/St_Petersburg.json" % api_key
+    output = ""
     current_weather_response = requests.get(query)
 
-    current_weather = CurrentWeather(current_weather_response.json())
-    return current_weather.to_text()
+    # todo выделить в функцию, сделать юнит-тесты для разных response, правильных и неправильных. В ссылке менять разные
+    # параметры
+    if current_weather_response.ok:
+        response_json = current_weather_response.json()
+        if 'response' in response_json and not 'error' in response_json['response']:
+            current_weather = CurrentWeather(response_json)
+            output = current_weather.to_text()
+    return output
 
 
 def time_str_from_epoch(time_epoch):
