@@ -46,13 +46,26 @@ class CurrentWeather:
         return text
 
 
-def get_current_weather():
+def get_current_weather_url():
+    """
+    make query with current weather request
+
+    """
     api_key = secrests.get("WUNDERGROUND_API_KEY")
-    query = "http://api.wunderground.com/api/%s/condfitions/lang:RU/q/Russia/St_Petersburg.json" % api_key
+    query = "http://api.wunderground.com/api/%s/conditions/lang:RU/q/Russia/St_Petersburg.json" % api_key
+    return query
+
+
+def get_current_weather():
+    """
+    Returns: text representation of current weather condition
+
+    """
+
+    query = get_current_weather_url()
     output = ""
     current_weather_response = requests.get(query)
 
-    # todo функция для формирования url, она используется в response, который для мокинга requests
     # todo выделить в функцию, сделать юнит-тесты для разных response, правильных и неправильных. В ссылке менять разные
     # параметры
     if current_weather_response.ok:
