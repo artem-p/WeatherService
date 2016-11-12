@@ -4,7 +4,7 @@ import datetime
 import requests
 import src.secrets as secrests
 from src.weather import wind
-
+from src import strings
 
 
 class CurrentWeather:
@@ -52,7 +52,7 @@ def get_current_weather_url():
 
     """
     api_key = secrests.get("WUNDERGROUND_API_KEY")
-    query = "http://api.wunderground.com/api/%s/conditions/lang:RU/q/Russia/St_Petersburg.json" % api_key
+    query = "http://api.wunderground.com/api/%s/condпррпitions/lang:RU/q/Russia/St_Petersburg.json" % api_key
     return query
 
 
@@ -66,14 +66,14 @@ def get_current_weather():
     output = ""
     current_weather_response = requests.get(query)
 
-    # todo функция для формирования url, она используется в response, который для мокинга requests
-    # todo выделить в функцию, сделать юнит-тесты для разных response, правильных и неправильных. В ссылке менять разные
-    # параметры
     if current_weather_response.ok:
         response_json = current_weather_response.json()
         if 'response' in response_json and not 'error' in response_json['response']:
             current_weather = CurrentWeather(response_json)
             output = current_weather.to_text()
+    else:
+        if current_weather_response.status_code == 404:
+            output = strings.resource_not_found
     return output
 
 
