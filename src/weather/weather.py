@@ -52,7 +52,7 @@ def get_current_weather_url():
 
     """
     api_key = secrests.get("WUNDERGROUND_API_KEY")
-    query = "http://api.wunderground.com/api/%s/condпррпitions/lang:RU/q/Russia/St_Petersburg.json" % api_key
+    query = "http://api.wunderground.com/api/%s/conditions/lang:RU/q/Russia/St_Petersburg.json" % api_key
     return query
 
 

@@ -1,5 +1,8 @@
 import flask
 import json
+from src.weather import weather
+
+
 app = flask.Flask(__name__)
 
 
@@ -14,7 +17,8 @@ def root():
 
 @app.route("/api/1.0/current")
 def get_current():
-    return json_resp(200, {"current_weather_str": "hello"})
+    current_weather = weather.get_current_weather()
+    return json_resp(200, {"current_weather_str": current_weather})
 
 
 if __name__ == "__main__":
