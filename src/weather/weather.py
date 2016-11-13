@@ -1,4 +1,4 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 import datetime
 
 import requests
@@ -75,6 +75,7 @@ def get_current_weather():
         if current_weather_response.status_code == 404:
             output = strings.resource_not_found
     return output
+
 
 
 def time_str_from_epoch(time_epoch):
