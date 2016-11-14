@@ -27,6 +27,8 @@ def get_current():
             return json_resp(200, {"current_weather_str": current_weather['text']})
         elif current_weather['status'] == weather.wunderground_not_available:
             return json_resp(502, {"error": strings.wunderground_not_available})
+        elif current_weather['status'] == weather.wunderground_error:
+            return json_resp(502, {"error": strings.wunderground_error})
     else:
         pass
 

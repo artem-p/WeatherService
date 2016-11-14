@@ -52,7 +52,19 @@ def test_get_no_wunderground_current():
     assert strings.wunderground_not_available in data_str
 
 
+@responses.activate
+def test_wunderground_error():
+    """General wunderground response error"""
+    responses.add(responses.GET, wunderground_current_weather_url, body='{"error": "not found"}',
+                  status=500, content_type='application/json')
 
+
+    resp = test_app.get(rest.current_weather_url)
+
+    assert resp.status_code == 502
+
+    data_str = resp.data.decode('utf-8')
+    assert strings.wunderground_error in data_str
 
 
 
