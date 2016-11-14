@@ -2,6 +2,7 @@
 import flask
 import json
 from src.weather import weather
+import src.strings as strings
 
 current_weather_url = '/api/1.0/current'
 
@@ -20,8 +21,14 @@ def root():
 @app.route(current_weather_url)
 def get_current():
     current_weather = weather.get_current_weather()
-    return json_resp(200, {"current_weather_str": current_weather})
 
+    if current_weather['status'] is not None:
+        if current_weather['status'] == weather.ok:
+            return json_resp(200, {"current_weather_str": current_weather['text']})
+        elif current_weather['status'] == weather.wunderground_not_available:
+            return json_resp(502, {"error": strings.wunderground_not_available})
+    else:
+        pass
 
 if __name__ == "__main__":
     app.run(debug=True)

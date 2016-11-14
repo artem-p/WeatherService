@@ -4,6 +4,7 @@
 import src.rest as rest
 import responses
 from src.weather import weather
+import src.strings as strings
 
 rest.app.config['TESTING'] = True
 test_app = rest.app.test_client()
@@ -35,3 +36,30 @@ def test_get_current():
     assert 'Температура: -4 °C' in data_str
     assert 'Ощущается как: -4 °C' in data_str
     assert 'Ветер: З 1.1 м/с' in data_str
+
+
+@responses.activate
+def test_get_no_wunderground_current():
+    """Test response when not found from wunderground"""
+
+    responses.add(responses.GET, wunderground_current_weather_url, body='{"error": "not found"}',
+                  status=404, content_type='application/json')
+
+    resp = test_app.get(rest.current_weather_url)
+
+    assert resp.status_code == 502
+    data_str = resp.data.decode('utf-8')
+    assert strings.wunderground_not_available in data_str
+
+
+
+
+
+
+
+
+
+
+
+
+

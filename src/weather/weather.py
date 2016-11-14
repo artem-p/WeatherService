@@ -6,6 +6,9 @@ import src.secrets as secrests
 from src.weather import wind
 from src import strings
 
+ok = 1
+wunderground_not_available = -1
+wunderground_error = -2
 
 class CurrentWeather:
     def __init__(self, current_weather_json):
@@ -63,19 +66,29 @@ def get_current_weather():
     """
 
     query = get_current_weather_url()
-    output = ""
+    output = {'status': None, 'text': ""}
     current_weather_response = requests.get(query)
 
     if current_weather_response.ok:
         response_json = current_weather_response.json()
         if 'response' in response_json and not 'error' in response_json['response']:
             current_weather = CurrentWeather(response_json)
-            output = current_weather.to_text()
+            output['status'] = ok
+            output['text'] = current_weather.to_text()
+        else:
+            # todo with test
+            pass
     else:
         if current_weather_response.status_code == 404:
-            output = strings.resource_not_found
-    return output
+            # wundergroung not available
+            output['status'] = wunderground_not_available
+            output['text'] = strings.wunderground_not_available
+        else:
+            # another wunderground error
+            output['status'] = wunderground_error
+            output['text'] = strings.wunderground_error
 
+    return output
 
 
 def time_str_from_epoch(time_epoch):
