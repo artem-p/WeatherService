@@ -67,6 +67,18 @@ def test_wunderground_error():
     assert strings.wunderground_error in data_str
 
 
+@responses.activate
+def test_wunderground_bad_response():
+    responses.add(responses.GET, wunderground_current_weather_url, body='{"response": "some wunderground error"}',
+                  status=200, content_type='application/json')
+
+
+    resp = test_app.get(rest.current_weather_url)
+
+    assert resp.status_code == 500
+
+    data_str = resp.data.decode('utf-8')
+    assert strings.wunderground_bad_response in data_str
 
 
 

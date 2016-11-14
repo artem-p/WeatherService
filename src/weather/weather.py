@@ -8,7 +8,8 @@ from src import strings
 
 ok = 1
 wunderground_not_available = -1
-wunderground_error = -2
+wunderground_connection_error = -2
+bad_response_from_wunderground = -3
 
 class CurrentWeather:
     def __init__(self, current_weather_json):
@@ -76,8 +77,8 @@ def get_current_weather():
             output['status'] = ok
             output['text'] = current_weather.to_text()
         else:
-            # todo with test
-            pass
+            output['status'] = bad_response_from_wunderground
+            output['text'] = strings.wunderground_bad_response
     else:
         if current_weather_response.status_code == 404:
             # wundergroung not available
@@ -85,7 +86,7 @@ def get_current_weather():
             output['text'] = strings.wunderground_not_available
         else:
             # another wunderground error
-            output['status'] = wunderground_error
+            output['status'] = wunderground_connection_error
             output['text'] = strings.wunderground_error
 
     return output
