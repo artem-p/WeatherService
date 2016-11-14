@@ -15,7 +15,6 @@ def test_redirect():
     resp = test_app.get('/')
     assert resp.status_code == 302
     assert resp.location == 'http://localhost/api/1.0/current'
-    pass
 
 
 @responses.activate

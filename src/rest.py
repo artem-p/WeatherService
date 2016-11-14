@@ -3,6 +3,7 @@ import flask
 import json
 from src.weather import weather
 import src.strings as strings
+from werkzeug.contrib.fixers import ProxyFix
 
 current_weather_url = '/api/1.0/current'
 
@@ -34,5 +35,7 @@ def get_current():
     else:
         pass
 
+
+app.wsgi_app = ProxyFix(app.wsgi_app)
 if __name__ == "__main__":
     app.run(debug=True)
