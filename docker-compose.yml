@@ -1,0 +1,16 @@
+version: '2'
+services:
+    nginx:
+        image: nginx
+        container_name: nginx-weather
+        hostname: nginx-weather
+        restart: always
+        ports:
+            - "8080:8080"
+        depends_on:
+            weather
+    weather:
+        build .
+        container_name: weather
+        expose:
+            - "8000"
