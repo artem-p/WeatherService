@@ -14,5 +14,6 @@ services:
     weather:
         build: .
         container_name: weather
+        restart: always
         expose:
             - "8000"
