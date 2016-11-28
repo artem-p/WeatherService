@@ -7,13 +7,13 @@ if __name__ == "__main__":
     api_key = secrets.get("OWM_API_KEY")
     owm = pyowm.OWM(API_key=api_key, language="ru")
 
-    place = "питер"
+    place = "пиdfsdfsdfтер"
 
     try:
         cur_weather = weather.get_current_at_place(owm, place)
 
         print(cur_weather)
-    except pyowm_exceptions.OWMError:
+    except pyowm.exceptions.OWMError:
         print("Ошибка pyowm")
     # except weather.WeatherNotFoundException:
     #     print("Не удалось получить данные для указанного места")

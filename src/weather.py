@@ -8,7 +8,6 @@ def get_current_at_place(owm, place):
                                 weather.get_detailed_status())
     return weather_str
 
-
 # def get_current_at_place_with_search(owm, place):
 #     observations = owm.weather_at_places(place, 'like', 3)
 #     if len(observations) > 0:
