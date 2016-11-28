@@ -1,16 +1,19 @@
 import pyowm
 import src.secrets as secrets
-
-
-def pyowm_try():
-    api_key = secrets.get("OWM_API_KEY")
-    owm = pyowm.OWM(api_key)
-
-    observation = owm.weather_at_place("London, uk")
-    w = observation.get_weather()
-    print(w)
-    pass
-
+import src.weather as weather
+import pyowm.exceptions as pyowm_exceptions
 
 if __name__ == "__main__":
-    pyowm_try()
+    api_key = secrets.get("OWM_API_KEY")
+    owm = pyowm.OWM(API_key=api_key, language="ru")
+
+    place = "питер"
+
+    try:
+        cur_weather = weather.get_current_at_place(owm, place)
+
+        print(cur_weather)
+    except pyowm_exceptions.OWMError:
+        print("Ошибка pyowm")
+    # except weather.WeatherNotFoundException:
+    #     print("Не удалось получить данные для указанного места")
