@@ -32,8 +32,7 @@ def root():
 @app.route(current_weather_url)
 def get_current():
     """
-    get current weather for location from parameters
-    Returns:
+    Returns: current weather for location from parameters
 
     """
     api_key = secrets.get("OWM_API_KEY")
@@ -42,7 +41,6 @@ def get_current():
     #   if no location in parameters use default
     location = request.args.get('location') if request.args.get('location') else default_location
 
-    location = "питер"
     try:
         cur_weather = weather.get_current_at_location(owm, location)
 
