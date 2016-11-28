@@ -11,9 +11,11 @@ import pyowm.exceptions.api_response_error
 import pyowm.exceptions.not_found_error
 import pyowm.exceptions.parse_response_error
 import pyowm.exceptions.unauthorized_error
+from flask import request
 
 
 current_weather_url = '/api/1.0/current'
+default_location = "Saint Petersburg"
 
 app = flask.Flask(__name__)
 
@@ -29,13 +31,20 @@ def root():
 
 @app.route(current_weather_url)
 def get_current():
+    """
+    get current weather for location from parameters
+    Returns:
+
+    """
     api_key = secrets.get("OWM_API_KEY")
     owm = pyowm.OWM(API_key=api_key, language="ru")
 
-    place = "питер"
+    #   if no location in parameters use default
+    location = request.args.get('location') if request.args.get('location') else default_location
 
+    location = "питер"
     try:
-        cur_weather = weather.get_current_at_place(owm, place)
+        cur_weather = weather.get_current_at_location(owm, location)
 
         return json_resp(200, cur_weather)
 

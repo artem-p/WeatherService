@@ -1,5 +1,14 @@
-def get_current_at_place(owm, place):
-    observation = owm.weather_at_place(place)
+def get_current_at_location(owm, location):
+    """
+    get current weather for specified location
+    Args:
+        owm:    pyowm object
+        location:   location to get weather
+
+    Returns:
+    String representation of current weather
+    """
+    observation = owm.weather_at_place(location)
 
     location = observation.get_location()
     weather = observation.get_weather()

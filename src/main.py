@@ -10,7 +10,7 @@ if __name__ == "__main__":
     place = "пиdfsdfsdfтер"
 
     try:
-        cur_weather = weather.get_current_at_place(owm, place)
+        cur_weather = weather.get_current_at_location(owm, place)
 
         print(cur_weather)
     except pyowm.exceptions.OWMError:
