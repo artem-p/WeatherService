@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import flask
 import json
-from src.weather import weather
+from src.wunderground import weather
 import src.strings as strings
 
 current_weather_url = '/api/1.0/current'

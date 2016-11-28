@@ -1,4 +1,4 @@
-from src.weather import forecast
+from src.wunderground import forecast
 
 
 def test_forecast_to_text():

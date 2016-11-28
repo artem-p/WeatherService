@@ -3,7 +3,7 @@ import datetime
 
 import requests
 import src.secrets as secrests
-from src.weather import wind
+from src.wunderground import wind
 from src import strings
 
 ok = 1
@@ -30,7 +30,7 @@ class CurrentWeather:
             self.city = current_observation['display_location']['city']
             timestamp = int(current_observation['observation_epoch'])
             self.time = time_str_from_epoch(timestamp)
-            self.conditions = current_observation['weather']
+            self.conditions = current_observation['wunderground']
             self.temp = current_observation['temp_c']
             self.feelslike = int(current_observation['feelslike_c'])
             self.wind_dir = current_observation['wind_degrees']
@@ -52,7 +52,7 @@ class CurrentWeather:
 
 def get_current_weather_url():
     """
-    make query with current weather request
+    make query with current wunderground request
 
     """
     api_key = secrests.get("WUNDERGROUND_API_KEY")
@@ -62,7 +62,7 @@ def get_current_weather_url():
 
 def get_current_weather():
     """
-    Returns: text representation of current weather condition
+    Returns: text representation of current wunderground condition
 
     """
 
