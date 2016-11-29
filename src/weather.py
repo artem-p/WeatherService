@@ -1,3 +1,6 @@
+import src.human_weather as human_weather
+
+
 def get_current_at_location(owm, location):
     """
     get current weather for specified location
@@ -13,8 +16,10 @@ def get_current_at_location(owm, location):
     location = observation.get_location()
     weather = observation.get_weather()
 
-    weather_str = "%s %s %s" % (location.get_name(), str(weather.get_temperature(unit='celsius')['temp']),
-                                weather.get_detailed_status())
+    temp = weather.get_temperature(unit='celsius')['temp']
+    condition = weather.get_detailed_status()
+
+    weather_str = "%s %s" % (location.get_name(), human_weather.get_human_representation(temp, condition))
     return weather_str
 
 # def get_current_at_place_with_search(owm, place):
