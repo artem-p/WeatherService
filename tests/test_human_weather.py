@@ -41,4 +41,9 @@ def test_get_human_temp():
     f_temp = 14.4
     assert human_weather.get_temp(f_temp) == "14 градусов"
 
+    f_temp = 15.4
+    assert human_weather.get_temp(f_temp) == "плюс 15"
+
+    f_temp = 19.6
+    assert human_weather.get_temp(f_temp) == "плюс 20"
 

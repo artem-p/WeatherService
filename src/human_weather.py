@@ -36,5 +36,7 @@ def get_temp(f_temp):
         temp_output = plus_format % round_temp
     elif round_temp <= 14:
         temp_output = grad_format % round_temp
+    else:
+        temp_output = plus_format % round_temp
 
     return temp_output
