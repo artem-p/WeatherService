@@ -59,27 +59,27 @@ def test_get_human_temp():
 #     assert human_weather.get_location(location_from_query) == "В Лондон"
 
 
-def test_get_declension():
+def test_get_locative():
     location = "Санкт-Петербург"
-    assert human_weather.get_declension(location) == "санкт-петербурге"
+    assert human_weather.get_locative_form(location) == "В Санкт-Петербурге"
 
     location = "Санкт-Петербурга"
-    assert human_weather.get_declension(location) == "санкт-петербурге"
+    assert human_weather.get_locative_form(location) == "В Санкт-Петербурге"
 
     location = "Питер"
-    assert human_weather.get_declension(location) == "питере"
+    assert human_weather.get_locative_form(location) == "В Питере"
 
     location = "питере"
-    assert human_weather.get_declension(location) == "питере"
+    assert human_weather.get_locative_form(location) == "В Питере"
 
     location = "москва"
-    assert human_weather.get_declension(location) == "москве"
+    assert human_weather.get_locative_form(location) == "В Москве"
 
     location = "москву"
-    assert human_weather.get_declension(location) == "москве"
+    assert human_weather.get_locative_form(location) == "В Москве"
 
     location = "Ростов-на-дону"
-    assert human_weather.get_declension(location) == "ростове-на-дону"
+    assert human_weather.get_locative_form(location) == "В Ростове-на-Дону"
 
     location = "петропавловск-камчатский"
-    assert human_weather.get_declension(location) == "петропавловске-камчатском"
+    assert human_weather.get_locative_form(location) == "В Петропавловске-Камчатском"

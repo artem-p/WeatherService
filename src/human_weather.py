@@ -73,3 +73,19 @@ def get_declension(location):
     normal_form = g_morph.parse(location)[0]
     declension = normal_form.inflect({'loc2'})
     return declension.word
+
+
+def get_locative_form(location):
+    """
+    get locative form of location (В Питере)
+    Returns:
+    str
+    """
+    declension = get_declension(location)
+    locative = "В %s" % declension.title()
+
+    # exception
+    if '-На-' in locative:
+        locative = locative.replace('-На-', '-на-')
+
+    return locative
