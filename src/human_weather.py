@@ -46,20 +46,6 @@ def get_temp(f_temp):
     return temp_output
 
 
-def get_location(location_from_query):
-    """
-    transform location from query to human readable format
-    питер -> В Питере
-    Args:
-        location_from_query:
-
-    Returns:
-    str
-    """
-    location = "В %s" % location_from_query.title()
-    return location
-
-
 def get_declension(location):
     """
     get declension of location

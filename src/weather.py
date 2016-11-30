@@ -19,7 +19,7 @@ def get_current_at_location(owm, location):
     temp = weather.get_temperature(unit='celsius')['temp']
     condition = weather.get_detailed_status()
 
-    weather_str = "%s %s" % (human_weather.get_location(location), human_weather.get_human_representation(temp, condition))
+    weather_str = "%s %s" % (human_weather.get_locative_form(location), human_weather.get_human_representation(temp, condition))
     return weather_str
 
 # def get_current_at_place_with_search(owm, place):
