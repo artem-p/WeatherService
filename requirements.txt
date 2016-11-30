@@ -3,3 +3,4 @@ requests
 responses
 gunicorn
 pyowm
+pymorphy2

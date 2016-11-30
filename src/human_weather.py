@@ -1,3 +1,7 @@
+import pymorphy2
+g_morph = pymorphy2.MorphAnalyzer()
+
+
 def get_human_representation(temp, weather_condition):
     """
     get weather in human readable representation
@@ -54,3 +58,18 @@ def get_location(location_from_query):
     """
     location = "В %s" % location_from_query.title()
     return location
+
+
+def get_declension(location):
+    """
+    get declension of location
+    Args:
+        location:
+
+    Returns:
+    str
+    """
+
+    normal_form = g_morph.parse(location)[0]
+    declension = normal_form.inflect({'loc2'})
+    return declension.word
