@@ -48,17 +48,6 @@ def test_get_human_temp():
     assert human_weather.get_temp(f_temp) == "плюс 20"
 
 
-# def test_get_human_location():
-#     location_from_query = "Питер"
-#     assert human_weather.get_location(location_from_query) == "В Питер"
-#
-#     location_from_query = "москва"
-#     assert human_weather.get_location(location_from_query) == "В Москва"
-#
-#     location_from_query = "лондон"
-#     assert human_weather.get_location(location_from_query) == "В Лондон"
-
-
 def test_get_locative():
     location = "Санкт-Петербург"
     assert human_weather.get_locative_form(location) == "В Санкт-Петербурге"
