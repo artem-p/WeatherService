@@ -13,13 +13,13 @@ def get_current_at_location(owm, location):
     """
     observation = owm.weather_at_place(location)
 
-    location = observation.get_location()
+    owm_location = observation.get_location()
     weather = observation.get_weather()
 
     temp = weather.get_temperature(unit='celsius')['temp']
     condition = weather.get_detailed_status()
 
-    weather_str = "%s %s" % (location.get_name(), human_weather.get_human_representation(temp, condition))
+    weather_str = "%s %s" % (human_weather.get_location(location), human_weather.get_human_representation(temp, condition))
     return weather_str
 
 # def get_current_at_place_with_search(owm, place):

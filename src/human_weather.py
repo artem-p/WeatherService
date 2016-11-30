@@ -8,7 +8,7 @@ def get_human_representation(temp, weather_condition):
     Returns:
     str
     """
-    return "%s %s" % (str(temp), weather_condition)
+    return "%s, %s." % (get_temp(temp), weather_condition)
 
 
 def get_temp(f_temp):
@@ -40,3 +40,17 @@ def get_temp(f_temp):
         temp_output = plus_format % round_temp
 
     return temp_output
+
+
+def get_location(location_from_query):
+    """
+    transform location from query to human readable format
+    питер -> В Питере
+    Args:
+        location_from_query:
+
+    Returns:
+    str
+    """
+    location = "В %s" % location_from_query.title()
+    return location
