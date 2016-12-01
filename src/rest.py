@@ -15,7 +15,7 @@ from flask import request
 
 
 current_weather_url = '/api/1.0/current'
-default_location = "Saint Petersburg"
+default_location = "Санкт-Петербург"
 
 app = flask.Flask(__name__)
 

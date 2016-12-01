@@ -13,7 +13,6 @@ def get_current_at_location(owm, location):
     """
     observation = owm.weather_at_place(location)
 
-    owm_location = observation.get_location()
     weather = observation.get_weather()
 
     temp = weather.get_temperature(unit='celsius')['temp']
