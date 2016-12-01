@@ -7,7 +7,7 @@ if __name__ == "__main__":
     api_key = secrets.get("OWM_API_KEY")
     owm = pyowm.OWM(API_key=api_key, language="ru")
 
-    place = "питер"
+    place = "Saint Petersburg"
 
     try:
         cur_weather = weather.get_current_at_location(owm, place)

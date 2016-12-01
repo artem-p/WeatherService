@@ -72,3 +72,6 @@ def test_get_locative():
 
     location = "петропавловск-камчатский"
     assert human_weather.get_locative_form(location) == "В Петропавловске-Камчатском"
+
+    location = "Saint Petersburg"
+    assert human_weather.get_locative_form(location) == "В Saint Petersburg"

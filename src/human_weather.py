@@ -56,9 +56,15 @@ def get_declension(location):
     str
     """
 
-    normal_form = g_morph.parse(location)[0]
-    declension = normal_form.inflect({'loc2'})
-    return declension.word
+    locative_form = location    # if we cant declens, return same as input
+
+    if len(g_morph.parse(location)) > 0:
+        normal_form = g_morph.parse(location)[0]
+        declension = normal_form.inflect({'loc2'})
+        if declension is not None:
+            locative_form = declension.word
+
+    return locative_form
 
 
 def get_locative_form(location):
